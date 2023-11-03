@@ -13,10 +13,7 @@ void Van::loadVan(Stack<Label>& stack) {
     
     if (loadedStack.size() == MAX_CAPACITY) {
         full = true;
-        while (!stack.empty() && loadedStack.size() < MAX_CAPACITY) {
-            loadedStack.push(stack.top());
-            stack.pop();
-        }
+        
     }
 }
 
