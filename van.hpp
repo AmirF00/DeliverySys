@@ -27,6 +27,11 @@ public:
     bool isFull() const;
     void simulateDelivery(Stack<Label>& stack);
     void waitForSeconds(int seconds);
+    
+    // Public function to access deliveredQueue
+   Queue<Label>& getDeliveredQueue() {
+    return deliveredQueue;
+    }   
 };
 
 #endif
