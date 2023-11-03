@@ -41,21 +41,9 @@ int main() {
     Stack<Label> stackNE;
     Stack<Label> stackNW;
 
-    // Push onto the zone-specific stacks
+    // Distribute labels into stacks in steps of 73 labels
     while (!initial.empty()) {
-        Label label = initial.dequeue();
-        std::string packageID = label.getPackageID();
-        // Determine the zone based on the last two characters of the Package ID
-        std::string zoneCode = packageID.substr(packageID.size() - 2);
-        if (zoneCode == "SE") {
-            stackSE.push(label);
-        } else if (zoneCode == "SW") {
-            stackSW.push(label);
-        } else if (zoneCode == "NE") {
-            stackNE.push(label);
-        } else if (zoneCode == "NW") {
-            stackNW.push(label);
-        }
+        distributeLabels(initial, stackSE, stackSW, stackNE, stackNW);
     }
 
     // Create a Van with an identifier
@@ -63,3 +51,4 @@ int main() {
 
     return 0;
 }
+
