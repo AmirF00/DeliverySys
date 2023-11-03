@@ -2,6 +2,30 @@
 #include "label.hpp"
 #include "queue.hpp"
 #include "stack.hpp"
+#include "van.hpp"
+
+
+// Function to distribute labels into stacks in steps of 73 labels
+void distributeLabels(Queue<Label>& initial, Stack<Label>& stackSE, Stack<Label>& stackSW, Stack<Label>& stackNE, Stack<Label>& stackNW) {
+    for (int i = 0; i < 73 && !initial.empty(); ++i) {
+        Label label = initial.dequeue();
+        std::string packageID = label.getPackageID();
+        std::string zoneCode = packageID.substr(packageID.size() - 2);
+
+        // Determine the zone and push the label onto the appropriate stack
+        if (zoneCode == "SE") {
+            stackSE.push(label);
+        } else if (zoneCode == "SW") {
+            stackSW.push(label);
+        } else if (zoneCode == "NE") {
+            stackNE.push(label);
+        } else if (zoneCode == "NW") {
+            stackNW.push(label);
+        }
+        // Add conditions for other zones (SW, NE, NW) if needed
+    }
+}
+
 
 
 int main() {
@@ -17,7 +41,7 @@ int main() {
     Stack<Label> stackNE;
     Stack<Label> stackNW;
 
-// Push onto the zone-specific stacks
+    // Push onto the zone-specific stacks
     while (!initial.empty()) {
         Label label = initial.dequeue();
         std::string packageID = label.getPackageID();
@@ -34,16 +58,8 @@ int main() {
         }
     }
 
-// You now have separate stacks for each zone: stackSE, stackSW, stackNE, stackNW
-// You can perform operations on these stacks as needed.
+    // Create a Van with an identifier
+    Van van("Van1"); // Replace "Van1" with an appropriate identifier
 
-// For example, to print the labels in stackNE:
-    while (!stackNE.empty()) {
-        Label label = stackNE.top();
-        std::cout << "Destination: " << label.getDestination() << ", Package ID: " << label.getPackageID() << ", Client ID: " << label.getClientID() << std::endl;
-        stackNE.pop();
-        }
     return 0;
 }
-
-

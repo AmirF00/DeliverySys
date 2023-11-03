@@ -10,50 +10,54 @@ public:
     bool empty() const;
     size_t size() const;
     void push(const T& value);
-    T pop();
-    T top() const;
+    void pop();
+    T& top();
+    const T& top() const;
 
 private:
-    std::vector<T> data;
+    std::vector<T> elements;
 };
-
-// Implementation of the template class should be in the header file.
-// The method definitions are included in the header file.
 
 template <typename T>
 Stack<T>::Stack() {}
 
 template <typename T>
 bool Stack<T>::empty() const {
-    return data.empty();
+    return elements.empty();
 }
 
 template <typename T>
 size_t Stack<T>::size() const {
-    return data.size();
+    return elements.size();
 }
 
 template <typename T>
 void Stack<T>::push(const T& value) {
-    data.push_back(value);
+    elements.push_back(value);
 }
 
 template <typename T>
-T Stack<T>::pop() {
+void Stack<T>::pop() {
     if (empty()) {
         throw std::runtime_error("Stack is empty.");
     }
-    T top = data.back();
-    data.pop_back();
-    return top;
+    elements.pop_back();
 }
 
 template <typename T>
-T Stack<T>::top() const {
+T& Stack<T>::top() {
     if (empty()) {
         throw std::runtime_error("Stack is empty.");
     }
-    return data.back();
+    return elements.back();
+}
+
+template <typename T>
+const T& Stack<T>::top() const {
+    if (empty()) {
+        throw std::runtime_error("Stack is empty.");
+    }
+    return elements.back();
 }
 
 #endif // STACK_HPP
