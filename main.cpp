@@ -40,14 +40,77 @@ int main() {
     Stack<Label> stackSW;
     Stack<Label> stackNE;
     Stack<Label> stackNW;
+    
+    // Create Vans with identifiers
+    Van vanNE1("VanNE1");
+    Van vanNW1("VanNW1");
+    Van vanSE1("VanSE1");
+    Van vanSW1("VanSW1");
+    
+    Van vanNE2("VanNE2");
+    Van vanNW2("VanNW2");
+    Van vanSE2("VanSE2");
+    Van vanSW2("VanSW2");
+    
+    
 
     // Distribute labels into stacks in steps of 73 labels
     while (!initial.empty()) {
         distributeLabels(initial, stackSE, stackSW, stackNE, stackNW);
+        
+        // Load the vans with stacks
+        vanNE1.loadVan(stackNE);
+        vanNW1.loadVan(stackNW);
+        vanSE1.loadVan(stackSE);
+        vanSW1.loadVan(stackSW);
+        
+    
+        if (vanNE1.isFull()) {
+            vanNE2.loadVan(stackNE);
+            if (vanNE2.isFull()) {
+                vanNE2.leave();
+                vanNE2.deliver();
+                vanNE2.returnToStation();
+                }
+            vanNE1.leave();
+            vanNE1.deliver();
+            vanNE1.returnToStation();
+        } else if (vanNW1.isFull()) {
+            vanNW2.loadVan(stackNW);
+            if (vanNW2.isFull()) {
+                vanNW2.leave();
+                vanNW2.deliver();
+                vanNW2.returnToStation();
+                }
+            vanNW1.leave();
+            vanNW1.deliver();
+            vanNW1.returnToStation();
+        } else if (vanSE1.isFull()) {
+            vanSE2.loadVan(stackSE);
+            if (vanSE2.isFull()) {
+                vanSE2.leave();
+                vanSE2.deliver();
+                vanSE2.returnToStation();
+                }
+            vanSE1.leave();
+            vanSE1.deliver();
+            vanSE1.returnToStation();
+        } else if (vanSW1.isFull()) {
+            vanSW2.loadVan(stackSW);
+            if (vanSW2.isFull()) {
+                vanSW2.leave();
+                vanSW2.deliver();
+                vanSW2.returnToStation();
+                }
+            vanSW1.leave();
+            vanSW1.deliver();
+            vanSW1.returnToStation();
+        }
+        
+
     }
 
-    // Create a Van with an identifier
-    Van van("Van1"); // Replace "Van1" with an appropriate identifier
+    
 
     return 0;
 }
