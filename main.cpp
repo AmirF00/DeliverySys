@@ -51,98 +51,131 @@ int main() {
     Van vanSE1("VanSE1");
     Van vanSW1("VanSW1");
     
-    Van vanNE2("VanNE2");
-    Van vanNW2("VanNW2");
-    Van vanSE2("VanSE2");
-    Van vanSW2("VanSW2");
     
     int vanNE1Trips = 0;
     int vanNW1Trips = 0;
     int vanSE1Trips = 0;
     int vanSW1Trips = 0;
-    int vanNE2Trips = 0;
-    int vanNW2Trips = 0;
-    int vanSE2Trips = 0;
-    int vanSW2Trips = 0;
     
-    
+    int mainCount = 0;
     
 
     // Distribute labels into stacks in steps of 73 labels
     while (!initial.empty()) {
-        wait();
+        //wait();
+        mainCount = mainCount + 1;
         distributeLabels(initial, stackSE, stackSW, stackNE, stackNW);
-        
+        size_t size1 = stackSE.size();
+        std::cout << "size of the Stack SE" << size1 << std::endl;
+    
+        size_t size2 = stackSW.size();
+        std::cout << "size of the Stack SW" << size2 << std::endl;
+    
+        size_t size3 = stackNE.size();
+        std::cout << "size of the Stack NE" << size3 << std::endl;
+    
+        size_t size4 = stackNW.size();
+        std::cout << "size of the Stack NW" << size4 << std::endl;
         // Load the vans with stacks
-        vanNE1.loadVan(stackNE);
-        vanNW1.loadVan(stackNW);
+        
         vanSE1.loadVan(stackSE);
+        std::cout << "van SE1 is loading..." << std::endl;
+        // Access the loadedStack of the Van
+        Stack<Label> stacktestSE1 = vanSE1.loadedStack;
+         // Create a copy of the stack
+        Stack<Label> stackCopySE1 = stacktestSE1;
+        while (!stackCopySE1.empty()) {
+            Label label = stackCopySE1.top();
+            stackCopySE1.pop();
+             //Process the label or do whatever you need with the copy
+            std::cout << "|| " << label.getID() << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+                }
+        vanNW1.loadVan(stackNW);
+        std::cout << "van NW1 is loading..." << std::endl;
+        // Access the loadedStack of the Van
+        Stack<Label> stacktestNW1 = vanNW1.loadedStack;
+         // Create a copy of the stack
+        Stack<Label> stackCopyNW1 = stacktestNW1;
+        while (!stackCopyNW1.empty()) {
+            Label label = stackCopyNW1.top();
+            stackCopyNW1.pop();
+             //Process the label or do whatever you need with the copy
+            std::cout << "|| " << label.getID() << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+                }
+        vanNE1.loadVan(stackNE);
+        std::cout << "van NE1 is loading..." << std::endl;
+        // Access the loadedStack of the Van
+        Stack<Label> stacktestNE1 = vanNE1.loadedStack;
+         // Create a copy of the stack
+        Stack<Label> stackCopyNE1 = stacktestNE1;
+        while (!stackCopyNE1.empty()) {
+            Label label = stackCopyNE1.top();
+            stackCopyNE1.pop();
+             //Process the label or do whatever you need with the copy
+            std::cout << "|| " << label.getID() << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+                }
         vanSW1.loadVan(stackSW);
+        std::cout << "van SW1 is loading..." << std::endl;
+        // Access the loadedStack of the Van
+        Stack<Label> stacktestSW1 = vanSW1.loadedStack;
+         // Create a copy of the stack
+        Stack<Label> stackCopySW1 = stacktestSW1;
+        while (!stackCopySW1.empty()) {
+            Label label = stackCopySW1.top();
+            stackCopySW1.pop();
+             //Process the label or do whatever you need with the copy
+            std::cout << "|| " << label.getID() << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+                }
         
     
         if (vanNE1.isFull()) {
             vanNE1Trips = vanNE1Trips + 1;
-            vanNE2.loadVan(stackNE);
-            if (vanNE2.isFull()) {
-                vanNE2Trips = vanNE2Trips + 1;
-                vanNE2.leave();
-                vanNE2.deliver();
-                vanNE2.emptyVan();
-                vanNE2.returnToStation();
-                }
             vanNE1.leave();
             vanNE1.deliver();
             vanNE1.emptyVan();
             vanNE1.returnToStation();
-        } else if (vanNW1.isFull()) {
+        } 
+            
+        if (vanNW1.isFull()) {
             vanNW1Trips = vanNW1Trips + 1;
-            vanNW2.loadVan(stackNW);
-            if (vanNW2.isFull()) {
-                vanNW2Trips = vanNW2Trips + 1;
-                vanNW2.leave();
-                vanNW2.deliver();
-                vanNW2.emptyVan();
-                vanNW2.returnToStation();
-                }
             vanNW1.leave();
             vanNW1.deliver();
             vanNW1.emptyVan();
             vanNW1.returnToStation();
-        } else if (vanSE1.isFull()) {
+        }  
+        if (vanSE1.isFull()) {
             vanSE1Trips = vanSE1Trips + 1;
-            vanSE2.loadVan(stackSE);
-            if (vanSE2.isFull()) {
-                vanSE2Trips = vanSE2Trips + 1;
-                vanSE2.leave();
-                vanSE2.deliver();
-                vanSE2.emptyVan();
-                vanSE2.returnToStation();
-                }
             vanSE1.leave();
             vanSE1.deliver();
             vanSE1.emptyVan();
             vanSE1.returnToStation();
-        } else if (vanSW1.isFull()) {
+        }  
+        if (vanSW1.isFull()) {
             vanSW1Trips = vanSW1Trips + 1;
-            vanSW2.loadVan(stackSW);
-            if (vanSW2.isFull()) {
-                vanSW2Trips = vanSW2Trips + 1;
-                vanSW2.leave();
-                vanSW2.deliver();
-                vanSW2.emptyVan();
-                vanSW2.returnToStation();
-                }
             vanSW1.leave();
             vanSW1.deliver();
             vanSW1.emptyVan();
             vanSW1.returnToStation();
         }
+                
+
         
         std::cout << "\nFinal State:" << std::endl;
         std::cout << "-----------------------------" << std::endl;
-        
+        std::cout << "Simulation round: " << mainCount << std::endl;
+        std::cout << "-----------------------------" << std::endl;
+        std::cout << "vanNE1 Trips: " << vanNE1Trips << std::endl;
+        std::cout << "vanNW1 Trips: " << vanNW1Trips << std::endl;
+        std::cout << "vanSE1 Trips: " << vanSE1Trips << std::endl;
+        std::cout << "vanSW1 Trips: " << vanSW1Trips << std::endl;
+        std::cout << "-----------------------------" << std::endl;
 
     }
+
+    
+    
+    
+
     
     
 

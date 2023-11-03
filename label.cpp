@@ -3,6 +3,8 @@
 #include <ctime>
 #include <iostream>
 
+int Label::instanceCount = 0;
+
 Label::Label() {
     // Generate random latitude
     latitude.degrees = randomInt(40, 41);
@@ -14,6 +16,9 @@ Label::Label() {
     longitude.minutes = randomInt(0, 59);
     longitude.seconds = randomInt(0, 59) + static_cast<double>(randomInt(0, 99)) / 100.0;
 
+    //getID
+    
+    
     // Determine the zone
     zone = static_cast<Zone>(randomInt(0, 3));
 
@@ -28,6 +33,9 @@ Label::Label() {
 
     // Generate a random Client-ID (8 random digits + 1 random letter)
     clientID = std::to_string(randomInt(10000000, 99999999)) + randomLetter();
+    
+    //increase the instaces
+    instanceCount++;
 }
 
 std::string Label::getDestination() const {
@@ -66,4 +74,8 @@ std::string Label::generateRandomDate() {
 
 int Label::random3DigitNumber() {
     return randomInt(100, 999);
+}
+
+std::string Label::getID() const {
+    return " ID: " + std::to_string(instanceCount);
 }

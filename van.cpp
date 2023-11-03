@@ -5,14 +5,21 @@ Van::Van(const std::string& identifier) : identifier(identifier), full(false) {
     // Constructor implementation
 }
 
-void Van::loadVan(const Stack<Label>& stack) {
-    if (loadedStack.size() < MAX_CAPACITY) {
+void Van::loadVan(Stack<Label>& stack) {
+    while (!stack.empty() && loadedStack.size() < MAX_CAPACITY) {
         loadedStack.push(stack.top());
-        if (loadedStack.size() == MAX_CAPACITY) {
-            full = true;
+        stack.pop();
+    }
+    
+    if (loadedStack.size() == MAX_CAPACITY) {
+        full = true;
+        while (!stack.empty() && loadedStack.size() < MAX_CAPACITY) {
+            loadedStack.push(stack.top());
+            stack.pop();
         }
     }
 }
+
 
 void Van::leave() {
     while (!full) {

@@ -17,12 +17,15 @@ public:
     std::string getDestination() const;
     std::string getPackageID() const;
     std::string getClientID() const;
+    std::string getID() const; // New function
+    
 
 private:
     GeoLocation latitude;
     GeoLocation longitude;
     Zone zone;
     int randomDigits;
+    static int instanceCount;
     char randomChar;
     std::string randomDate;
     std::string clientID;

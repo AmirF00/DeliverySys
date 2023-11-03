@@ -13,13 +13,16 @@ class Van {
 private:
     const std::string identifier;
     static const int MAX_CAPACITY = 24;
-    Stack<Label> loadedStack;
+    
     Queue<Label> deliveredQueue; // Member variable to store delivered labels
     bool full;
 
 public:
+
+    Stack<Label> loadedStack;
+    
     Van(const std::string& identifier);
-    void loadVan(const Stack<Label>& stack);
+    void loadVan(Stack<Label>& stack);
     void leave();
     void deliver();
     void emptyVan();
