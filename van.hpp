@@ -24,6 +24,7 @@ public:
     Van(const std::string& identifier);
     void loadVan(Stack<Label>& stack);
     void leave();
+    void leaveLast();
     void deliver();
     void emptyVan();
     void returnToStation();

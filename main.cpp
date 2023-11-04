@@ -74,6 +74,10 @@ int main() {
     
     int mainCount = 0;
     
+    Queue<Label> deliveredQueueSWCopy;
+    Queue<Label> deliveredQueueNECopy;
+    Queue<Label> deliveredQueueNWCopy;
+    Queue<Label> deliveredQueueSECopy;
 
     // Distribute labels into stacks in steps of 73 labels
     while (!initial.empty()) {
@@ -206,7 +210,7 @@ int main() {
         std::cout << "Labels delivered to NE\n" << std::endl;
         Queue<Label>& deliveredQueueNE = vanNE1.getDeliveredQueue();
         //create copy
-        Queue<Label> deliveredQueueNECopy;
+        
         // present the copy 
         while (!deliveredQueueNE.empty()) {
             Label label = deliveredQueueNE.dequeue(); // Dequeue a label from the original queue
@@ -219,7 +223,7 @@ int main() {
         std::cout << "Labels delivered to NW\n" << std::endl;
         Queue<Label>& deliveredQueueNW = vanNW1.getDeliveredQueue();
         //create copy
-        Queue<Label> deliveredQueueNWCopy;
+        
         // present the copy 
         while (!deliveredQueueNW.empty()) {
             Label label = deliveredQueueNW.dequeue(); // Dequeue a label from the original queue
@@ -232,7 +236,7 @@ int main() {
         std::cout << "Labels delivered to SE\n" << std::endl;
         Queue<Label>& deliveredQueueSE = vanSE1.getDeliveredQueue();
         //create copy
-        Queue<Label> deliveredQueueSECopy;
+       
         // present the copy 
         while (!deliveredQueueSE.empty()) {
             Label label = deliveredQueueSE.dequeue(); // Dequeue a label from the original queue
@@ -245,7 +249,7 @@ int main() {
         std::cout << "Labels delivered to SW\n" << std::endl;
         Queue<Label>& deliveredQueueSW = vanSW1.getDeliveredQueue();
         //create copy
-        Queue<Label> deliveredQueueSWCopy;
+        
         // present the copy 
         while (!deliveredQueueSW.empty()) {
             Label label = deliveredQueueSW.dequeue(); // Dequeue a label from the original queue
@@ -254,12 +258,175 @@ int main() {
             }
 
     }
+    
+    size_t size1 = stackSE.size();
+    std::cout << "size of the Stack SE" << size1 << std::endl;
+    
+    size_t size2 = stackSW.size();
+    std::cout << "size of the Stack SW" << size2 << std::endl;
+    
+    size_t size3 = stackNE.size();
+    std::cout << "size of the Stack NE" << size3 << std::endl;
+    
+    size_t size4 = stackNW.size();
+    std::cout << "size of the Stack NW" << size4 << std::endl;
 
+    if (!stackSE.empty()){
+        vanSE1.loadVan(stackSE);
+        }
     
+    std::cout << "van SE1 is loading..." << std::endl;
     
+    if (!stackNW.empty()){
+        vanNW1.loadVan(stackNW);
+        }
+    std::cout << "van NW1 is loading..." << std::endl;
     
-
+    if (!stackNE.empty()){
+        vanNE1.loadVan(stackNE);
+    }
+    std::cout << "van NE1 is loading..." << std::endl;
     
+    if (!stackSW.empty()){
+        vanSW1.loadVan(stackSW);
+    }
+    std::cout << "van SW1 is loading..." << std::endl;
+    
+    vanNE1Trips = vanNE1Trips + 1;
+    std::cout << "Van NE1 is leaving..." << std::endl;
+    vanNE1.leaveLast();
+    std::cout << "Van NE1 is deliverying..." << std::endl;
+    vanNE1.deliver();
+    std::cout << "Van NE1 is emptying the packets..." << std::endl;
+    vanNE1.emptyVan();
+    std::cout << "Van NE1 is returning back..." << std::endl;
+    vanNE1.returnToStation();
+    
+    vanNW1Trips = vanNW1Trips + 1;
+    std::cout << "Van NW1 is leaving..." << std::endl;
+    vanNW1.leaveLast();
+    std::cout << "Van Nw1 is deliverying..." << std::endl;
+    vanNW1.deliver();
+    std::cout << "Van NW1 is emptying..." << std::endl;
+    vanNW1.emptyVan();
+    std::cout << "Van NW1 is returning back..." << std::endl;
+    vanNW1.returnToStation();
+    
+    vanSE1Trips = vanSE1Trips + 1;
+    std::cout << "Van SE1 is leaving..." << std::endl;
+    vanSE1.leaveLast();
+    std::cout << "Van SE1 is deliverying..." << std::endl;
+    vanSE1.deliver();
+    std::cout << "Van SE1 is emtying..." << std::endl;
+    vanSE1.emptyVan();
+    std::cout << "Van SE1 is returning back..." << std::endl;
+    vanSE1.returnToStation();
+    
+    vanSW1Trips = vanSW1Trips + 1;
+    std::cout << "Van SW1 is leaving..." << std::endl;
+    vanSW1.leaveLast();
+    std::cout << "Van SW1 is deliverying..." << std::endl;
+    vanSW1.deliver();
+    std::cout << "Van SW1 is emptying..." << std::endl;
+    vanSW1.emptyVan();
+    std::cout << "Van SW1 is returning back..." << std::endl;
+    vanSW1.returnToStation();
+    
+    std::cout << "\nFinal State:" << std::endl;
+    std::cout <<  "The Central Station Queue: " << initial.size() << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "Simulation round: " << mainCount << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "vanNE1 Trips: " << vanNE1Trips << std::endl;
+    std::cout << "vanNW1 Trips: " << vanNW1Trips << std::endl;
+    std::cout << "vanSE1 Trips: " << vanSE1Trips << std::endl;
+    std::cout << "vanSW1 Trips: " << vanSW1Trips << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+        // Labels delivered to  NE
+    std::cout << "Labels delivered to NE\n" << std::endl;
+    Queue<Label>& deliveredQueueNE = vanNE1.getDeliveredQueue();
+        //create copy
+    
+        // present the copy 
+    while (!deliveredQueueNE.empty()) {
+        Label label = deliveredQueueNE.dequeue(); // Dequeue a label from the original queue
+        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        deliveredQueueNECopy.enqueue(label);
+        }
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "-----------------------------" << std::endl;    
+        // Labels delivered to NW
+    std::cout << "Labels delivered to NW\n" << std::endl;
+    Queue<Label>& deliveredQueueNW = vanNW1.getDeliveredQueue();
+        //create copy
+    
+        // present the copy 
+    while (!deliveredQueueNW.empty()) {
+        Label label = deliveredQueueNW.dequeue(); // Dequeue a label from the original queue
+        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        deliveredQueueNWCopy.enqueue(label);
+        }
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+        // Labels delivered to SE
+    std::cout << "Labels delivered to SE\n" << std::endl;
+    Queue<Label>& deliveredQueueSE = vanSE1.getDeliveredQueue();
+        //create copy
+    
+        // present the copy 
+    while (!deliveredQueueSE.empty()) {
+        Label label = deliveredQueueSE.dequeue(); // Dequeue a label from the original queue
+        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        deliveredQueueSECopy.enqueue(label);
+        }
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+        // Labels delivered to SW
+    std::cout << "Labels delivered to SW\n" << std::endl;
+    Queue<Label>& deliveredQueueSW = vanSW1.getDeliveredQueue();
+        //create copy
+    
+        // present the copy 
+    while (!deliveredQueueSW.empty()) {
+        Label label = deliveredQueueSW.dequeue(); // Dequeue a label from the original queue
+        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        deliveredQueueSWCopy.enqueue(label);
+        }
+        
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "FINAL DELIVERED RESULT" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "Labels delivered to NE\n" << std::endl;
+    while (!deliveredQueueNECopy.empty()) {
+        Label label = deliveredQueueNECopy.dequeue();
+        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        }
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "Labels delivered to NW\n" << std::endl;
+    while (!deliveredQueueNWCopy.empty()){
+        Label label = deliveredQueueNWCopy.dequeue();
+        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        }
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "Labels delivered to SE\n" << std::endl;
+    while (!deliveredQueueSECopy.empty()){
+        Label label = deliveredQueueSECopy.dequeue();
+        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        }
+    
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "Labels delivered to SW\n" << std::endl;
+    while (!deliveredQueueSWCopy.empty()) {
+        Label label = deliveredQueueSWCopy.dequeue();
+        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        }
     
     // Restore the std::cout buffer
     //std::cout.rdbuf(coutBuffer);
