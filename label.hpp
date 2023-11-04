@@ -17,7 +17,7 @@ public:
     std::string getDestination() const;
     std::string getPackageID() const;
     std::string getClientID() const;
-    std::string getID() const; // New function
+    //std::string getID() const; // New function
     
 
 private:

@@ -3,7 +3,7 @@
 #include <ctime>
 #include <iostream>
 
-int Label::instanceCount = 0;
+//int Label::instanceCount = 0;
 
 Label::Label() {
     // Generate random latitude
@@ -35,7 +35,7 @@ Label::Label() {
     clientID = std::to_string(randomInt(10000000, 99999999)) + randomLetter();
     
     //increase the instaces
-    instanceCount++;
+    //instanceCount++;
 }
 
 std::string Label::getDestination() const {
@@ -76,6 +76,6 @@ int Label::random3DigitNumber() {
     return randomInt(100, 999);
 }
 
-std::string Label::getID() const {
-    return " ID: " + std::to_string(instanceCount);
-}
+//std::string Label::getID() const {
+    //return " ID: " + std::to_string(instanceCount);
+//}

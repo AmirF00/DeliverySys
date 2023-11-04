@@ -32,9 +32,7 @@ void distributeLabels(Queue<Label>& initial, Stack<Label>& stackSE, Stack<Label>
     }
 }
 
-void wait() {
-        std::this_thread::sleep_for(std::chrono::seconds(5));
-        }
+
 
 int main() {
     
@@ -84,6 +82,11 @@ int main() {
         //wait();
         mainCount = mainCount + 1;
         distributeLabels(initial, stackSE, stackSW, stackNE, stackNW);
+        std::cout << "\nFinal State:" << std::endl;
+        std::cout <<  "The Central Station Queue: " << initial.size() << std::endl;
+        std::cout << "-----------------------------" << std::endl;
+        std::cout << "Simulation round: " << mainCount << std::endl;
+        std::cout << "-----------------------------" << std::endl;
         size_t size1 = stackSE.size();
         std::cout << "size of the Stack SE" << size1 << std::endl;
     
@@ -99,52 +102,16 @@ int main() {
         
         vanSE1.loadVan(stackSE);
         std::cout << "van SE1 is loading..." << std::endl;
-        // Access the loadedStack of the Van
-        //Stack<Label> stacktestSE1 = vanSE1.loadedStack;
-         // Create a copy of the stack
-        //Stack<Label> stackCopySE1 = stacktestSE1;
-        //while (!stackCopySE1.empty()) {
-            //Label label = stackCopySE1.top();
-            //stackCopySE1.pop();
-             //Process the label or do whatever you need with the copy
-          //  std::cout << "|| " << label.getID() << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
-        //        }
+        
         vanNW1.loadVan(stackNW);
         std::cout << "van NW1 is loading..." << std::endl;
-        // Access the loadedStack of the Van
-        //Stack<Label> stacktestNW1 = vanNW1.loadedStack;
-         // Create a copy of the stack
-        //Stack<Label> stackCopyNW1 = stacktestNW1;
-        //while (!stackCopyNW1.empty()) {
-            //Label label = stackCopyNW1.top();
-            //stackCopyNW1.pop();
-             //Process the label or do whatever you need with the copy
-           // std::cout << "|| " << label.getID() << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
-         //       }
+        
         vanNE1.loadVan(stackNE);
         std::cout << "van NE1 is loading..." << std::endl;
-        // Access the loadedStack of the Van
-        //Stack<Label> stacktestNE1 = vanNE1.loadedStack;
-         // Create a copy of the stack
-        //Stack<Label> stackCopyNE1 = stacktestNE1;
-        //while (!stackCopyNE1.empty()) {
-            //Label label = stackCopyNE1.top();
-            //stackCopyNE1.pop();
-             //Process the label or do whatever you need with the copy
-            //std::cout << "|| " << label.getID() << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
-              //  }
+       
         vanSW1.loadVan(stackSW);
         std::cout << "van SW1 is loading..." << std::endl;
-        // Access the loadedStack of the Van
-        //Stack<Label> stacktestSW1 = vanSW1.loadedStack;
-         // Create a copy of the stack
-        //Stack<Label> stackCopySW1 = stacktestSW1;
-        //while (!stackCopySW1.empty()) {
-            //Label label = stackCopySW1.top();
-            //stackCopySW1.pop();
-             //Process the label or do whatever you need with the copy
-            //std::cout << "|| " << label.getID() << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
-              //  }
+        
         
     
         if (vanNE1.isFull()) {
@@ -193,7 +160,6 @@ int main() {
             vanSW1.returnToStation();
         }
                 
-
         
         std::cout << "\nFinal State:" << std::endl;
         std::cout <<  "The Central Station Queue: " << initial.size() << std::endl;
@@ -401,31 +367,39 @@ int main() {
     std::cout << "-----------------------------" << std::endl;
     std::cout << "-----------------------------" << std::endl;
     std::cout << "Labels delivered to NE\n" << std::endl;
+    int c1 = 0;
     while (!deliveredQueueNECopy.empty()) {
+        c1 += 1;
         Label label = deliveredQueueNECopy.dequeue();
-        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        std::cout << c1 << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
         }
     std::cout << "-----------------------------" << std::endl;
     std::cout << "-----------------------------" << std::endl;
     std::cout << "Labels delivered to NW\n" << std::endl;
+    int c2 = 0;
     while (!deliveredQueueNWCopy.empty()){
+        c2 += 1;
         Label label = deliveredQueueNWCopy.dequeue();
-        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        std::cout << c2 <<"|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
         }
     std::cout << "-----------------------------" << std::endl;
     std::cout << "-----------------------------" << std::endl;
     std::cout << "Labels delivered to SE\n" << std::endl;
+    int c3 = 0;
     while (!deliveredQueueSECopy.empty()){
+        c3 += 1;
         Label label = deliveredQueueSECopy.dequeue();
-        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        std::cout << c3 <<"|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
         }
     
     std::cout << "-----------------------------" << std::endl;
     std::cout << "-----------------------------" << std::endl;
     std::cout << "Labels delivered to SW\n" << std::endl;
+    int c4 = 0;
     while (!deliveredQueueSWCopy.empty()) {
+        c4 += 1;
         Label label = deliveredQueueSWCopy.dequeue();
-        std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+        std::cout << c4 <<"|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
         }
     
     // Restore the std::cout buffer
