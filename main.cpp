@@ -81,7 +81,7 @@ int main() {
     bool continueSimulation = true;
 
     // Distribute labels into stacks in steps of 73 labels
-    while (continueSimulation) {
+    while (continueSimulation && mainCount < 48) {
         // Wait for Enter key press
         std::cout << "Press Enter to continue to the next round...";
         while (true) {
@@ -189,9 +189,11 @@ int main() {
         //create copy
         
         // present the copy 
+        int t1 = 0;
         while (!deliveredQueueNE.empty()) {
+            t1 += 1;
             Label label = deliveredQueueNE.dequeue(); // Dequeue a label from the original queue
-            std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+            std::cout << t1 <<"|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
             deliveredQueueNECopy.enqueue(label);
             }
         std::cout << "-----------------------------" << std::endl;
@@ -202,9 +204,11 @@ int main() {
         //create copy
         
         // present the copy 
+        int t2 = 0;
         while (!deliveredQueueNW.empty()) {
+            t2 += 1;
             Label label = deliveredQueueNW.dequeue(); // Dequeue a label from the original queue
-            std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+            std::cout << t2 <<"|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
             deliveredQueueNWCopy.enqueue(label);
             }
         std::cout << "-----------------------------" << std::endl;
@@ -215,9 +219,11 @@ int main() {
         //create copy
        
         // present the copy 
+        int t3 = 0;
         while (!deliveredQueueSE.empty()) {
+            t3 += 1; 
             Label label = deliveredQueueSE.dequeue(); // Dequeue a label from the original queue
-            std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+            std::cout << t3 <<"|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
             deliveredQueueSECopy.enqueue(label);
             }
         std::cout << "-----------------------------" << std::endl;
@@ -226,18 +232,28 @@ int main() {
         std::cout << "Labels delivered to SW\n" << std::endl;
         Queue<Label>& deliveredQueueSW = vanSW1.getDeliveredQueue();
         //create copy
-        
+        int t4 = 0;
         // present the copy 
         while (!deliveredQueueSW.empty()) {
+            t4 += 1;
             Label label = deliveredQueueSW.dequeue(); // Dequeue a label from the original queue
-            std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
+            std::cout << t4 <<"|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
             deliveredQueueSWCopy.enqueue(label);
             }
-    std::cout << "\nDo you want to continue the simulation (y/n)? ";
     char choice;
-    std::cin >> choice;
+    while (true) {
+        std::cout << "\nDo you want to continue the simulation (y/n)? ";
+        std::cin >> choice;
+        if (choice == 'y' || choice == 'Y' || choice == 'n' || choice == 'N') {
+            break;
+        } else {
+            std::cout << "Invalid input. Please enter 'y' or 'n'.\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    }
+
     continueSimulation = (choice == 'y' || choice == 'Y');
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the newline character
     
     }
     

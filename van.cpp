@@ -21,16 +21,16 @@ void Van::loadVan(Stack<Label>& stack) {
 void Van::leave() {
     while (!full) {
         // Keep loading labels until the van is full
-        waitForSeconds(1);
+        waitForSeconds(0.1);
     }
 }
 
 void Van::leaveLast() {
-        waitForSeconds(1);
+        waitForSeconds(0.1);
 }
 
 void Van::deliver() {
-    waitForSeconds(3); // Simulate delivery time
+    waitForSeconds(0.3); // Simulate delivery time
     emptyVan();
 }
 
@@ -43,7 +43,7 @@ void Van::emptyVan() {
 }
 
 void Van::returnToStation() {
-    waitForSeconds(3); // Simulate return time
+    waitForSeconds(0.3); // Simulate return time
 }
 
 bool Van::isFull() const {
