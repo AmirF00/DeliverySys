@@ -9,10 +9,12 @@
 #include <chrono>
 #include <thread>
 
+#define N3 24  // Define N3 as 24
+
 class Van {
 private:
     const std::string identifier;
-    static const int MAX_CAPACITY = 24;
+    static const int MAX_CAPACITY = N3;
     
     Queue<Label> deliveredQueue; // Member variable to store delivered labels
     bool full;

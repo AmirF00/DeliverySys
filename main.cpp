@@ -8,12 +8,12 @@
 #include "stack.hpp"
 #include "van.hpp"
 
-
-
+#define N1 3500
+#define N2 73  // Define the value of N2
 
 // Function to distribute labels into stacks in steps of 73 labels
 void distributeLabels(Queue<Label>& initial, Stack<Label>& stackSE, Stack<Label>& stackSW, Stack<Label>& stackNE, Stack<Label>& stackNW) {
-    for (int i = 0; i < 73 && !initial.empty(); ++i) {
+    for (int i = 0; i < N2 && !initial.empty(); ++i) {
         Label label = initial.dequeue();
         std::string packageID = label.getPackageID();
         std::string zoneCode = packageID.substr(packageID.size() - 2);
@@ -48,7 +48,7 @@ int main() {
     
     // Create the initial queue with 3500 instances of Label
     Queue<Label> initial;
-    for (int i = 0; i < 3500; ++i) {
+    for (int i = 0; i < N1; ++i) {
         initial.enqueue(Label());
     }
 
