@@ -76,10 +76,21 @@ int main() {
     Queue<Label> deliveredQueueNECopy;
     Queue<Label> deliveredQueueNWCopy;
     Queue<Label> deliveredQueueSECopy;
+    
+    
+    bool continueSimulation = true;
 
     // Distribute labels into stacks in steps of 73 labels
-    while (!initial.empty()) {
-        //wait();
+    while (continueSimulation) {
+        // Wait for Enter key press
+        std::cout << "Press Enter to continue to the next round...";
+        while (true) {
+            char input = std::cin.get();
+            if (input == '\n') {
+                break;
+            }
+        }
+
         mainCount = mainCount + 1;
         distributeLabels(initial, stackSE, stackSW, stackNE, stackNW);
         std::cout << "\nFinal State:" << std::endl;
@@ -222,7 +233,12 @@ int main() {
             std::cout << "|| " << label.getDestination() << ", ||  " << label.getPackageID() << "||  " << label.getClientID() << std::endl;
             deliveredQueueSWCopy.enqueue(label);
             }
-
+    std::cout << "\nDo you want to continue the simulation (y/n)? ";
+    char choice;
+    std::cin >> choice;
+    continueSimulation = (choice == 'y' || choice == 'Y');
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the newline character
+    
     }
     
     size_t size1 = stackSE.size();
